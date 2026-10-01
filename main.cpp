@@ -5,18 +5,26 @@
 
 void runTests() {
     auto res = PatternMatcher::findAll("abacb", "a*b");
-    assert(res.size() == 2);
+    assert(res.size() == 3);
 }
 
 std::string genData(int size) {
-    return std::string(size, 'a') + "b";
+    std::string res;
+    for(int i = 0; i < size; ++i) res += "abc";
+    return res;
 }
 
 int main() {
     runTests();
-    std::string text = genData(3000); 
-    std::string pat = "a*a*a*b";
-    auto res = PatternMatcher::findAll(text, pat);
-    std::cout << res.size() << "\n";
+    std::string text = genData(600);
+    std::string pat = "a*c";
+    
+    int matches = 0;
+    for(int i = 0; i < 20; ++i) {
+        auto res = PatternMatcher::findAll(text, pat);
+        matches = res.size();
+    }
+    
+    std::cout << matches << "\n";
     return 0;
 }
